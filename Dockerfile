@@ -16,4 +16,16 @@ ENV PYTHONUNBUFFERED=1
 # Upgrade pip
 RUN pip install --upgrade pip
 
+# Copy the requirements file first (better caching)
+COPY requirements.txt /app/
+ 
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . /app/
+
+# Expose the Django port
+EXPOSE 8000
+
+# Run Django’s development server
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
