@@ -18,3 +18,6 @@ def intro_function(request,name,age):
         "age" : age
     }
     return JsonResponse(my_dictionary)
+
+def first_page(request):
+    return render(request,'index.html')
